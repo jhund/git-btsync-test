@@ -24,3 +24,10 @@ What I found out:
     Turns out that this is a documented bug. From
     http://forum.bittorrent.com/topic/16410-bittorrent-sync-faq/
     >  (due to system peculiarities, sync on Mac OS X 10.6 may be delayed up to 10 minutes)
+4.) git can get out of sync temporarily when I make changes on computer A, commit
+    then file updates are sync'd to computer b. Working tree is dirty because
+    of local (sync'd) file changes. git pull doesn't work, says to commit
+    changes first. However this clears up once all the .git files are sync'd
+    and then working tree is clean again. So just give it some time.
+    This might have been worse for me since I made the changes on the
+    SnowLeopard computer that has an up to 10 minute sync delay.
