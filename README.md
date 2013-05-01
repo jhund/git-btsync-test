@@ -16,3 +16,4 @@ What I found out:
 -----------------
 
 1.) BTsync syncs the .git directory. So both the source code and the git meta info will be sync'd.
+2.) Added `.Sync*` to `.gitignore`. I want these files to be managed by btsync.
