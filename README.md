@@ -34,36 +34,36 @@ With this test I'm trying to answer these questions:
 Test setup
 ----------
 
-1) iMac with OS X 10.6 (Snow Leopard)
-2) Macbook Pro with OS X 10.8 (Mountain Lion)
+1. iMac with OS X 10.6 (Snow Leopard)
+2. Macbook Pro with OS X 10.8 (Mountain Lion)
 
 Current versions of git and btsync on both machines, and this repo as a test repo.
 
 What I found out
 ----------------
 
-1.) btsync syncs the .git directory. So both the source code and the git meta 
-    info will be sync'd.
-2.) When syncing a git repository root folder, I added `.Sync*` to `.gitignore`. 
-    I want these files to be managed by btsync only.
-3.) I confirmed the significant sync delay on OS X 10.6. I observed about 10 minutes.
-    This is a documented bug:
-    http://forum.bittorrent.com/topic/16410-bittorrent-sync-faq/
-    >  (due to system peculiarities, sync on Mac OS X 10.6 may be delayed up to 10 minutes)
-    Btsync is fairly fast when I make the change on OS X 10.8 (< 30 seconds).
-4.) git can get out of sync temporarily in the following scenario:
-    1.) I make changes on computer A, and btsync updates them immediately on
-        computer B. At this point both computers have uncommitted changes.
-    2.) I commit the changes on computer A and push them to origin.
-    3.) Here is where the race condition occurs: When I immediately try to pull
-        on computer B, git complains that I have uncommitted changes.
-    4.) If I wait a little bit, the git meta files will have been sync'd as well
-        and now the changes are not uncommitted any more, the working tree is
-        clean.
+1. btsync syncs the .git directory. So both the source code and the git meta 
+   info will be sync'd.
+2. When syncing a git repository root folder, I added `.Sync*` to `.gitignore`. 
+   I want these files to be managed by btsync only.
+3. I confirmed the significant sync delay on OS X 10.6. I observed about 10 minutes.
+   This is a documented bug:
+   http://forum.bittorrent.com/topic/16410-bittorrent-sync-faq/
+   >  (due to system peculiarities, sync on Mac OS X 10.6 may be delayed up to 10 minutes)
+   Btsync is fairly fast when I make the change on OS X 10.8 (< 30 seconds).
+4. git can get out of sync temporarily in the following scenario:
+    1. I make changes on computer A, and btsync updates them immediately on
+       computer B. At this point both computers have uncommitted changes.
+    2. I commit the changes on computer A and push them to origin.
+    3. Here is where the race condition occurs: When I immediately try to pull
+       on computer B, git complains that I have uncommitted changes.
+    4. If I wait a little bit, the git meta files will have been sync'd as well
+       and now the changes are not uncommitted any more, the working tree is
+       clean.
     I think this issue was exacerbated by the sync delays on OS X 10.6.
     It was all cleaned up once the .git directory was sync'd.
-5.) When doing rails dev, I add the following files to `.SyncIgnore`:
-    `log/*` and `tmp/*`.
+5. When doing rails dev, I add the following files to `.SyncIgnore`:
+   `log/*` and `tmp/*`.
 
 Conclusion
 ----------
